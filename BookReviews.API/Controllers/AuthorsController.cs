@@ -16,37 +16,30 @@ namespace BookReviews.API.Controllers
         [HttpGet]
         public IActionResult GetAllAuthors()
         {
-            //merr te dhena nga database (fake db)
-            var result = FakeData.GetAllFakeAuthors();
-            //kthimi
-            return Ok(result);
+            return Ok();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetAuthorById(int id)
         {
-            //marr te dhenat nga database (fake db)
-            var result = FakeData.GetAllFakeAuthors()
-                .FirstOrDefault(x => x.Id == id);
-
-            return Ok(result);
-        }
-
-        [HttpGet("new/{firstName}")]
-        public IActionResult GetAuthorByFirstName(string firstName)
-        {
-            //marr te dhenat nga database (fake db)
-            var result = FakeData.GetAllFakeAuthors()
-                .FirstOrDefault(x => x.FirstName == firstName);
-
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost]
         public IActionResult AddAuthor()
         {
-            //shtohen te dhenat
+            return Ok();
+        }
 
+        [HttpPut]
+        public IActionResult UpdateAuthor()
+        {
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteAuthor()
+        {
             return Ok();
         }
     }

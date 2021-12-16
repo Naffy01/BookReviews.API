@@ -1,7 +1,9 @@
+using BookReviews.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,9 +18,11 @@ namespace BookReviews.API
 {
     public class Startup
     {
+        public string DbConntectionString { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            DbConntectionString = configuration.GetConnectionString("DefaultConnectionString");
         }
 
         public IConfiguration Configuration { get; }
@@ -28,6 +32,10 @@ namespace BookReviews.API
         {
 
             services.AddControllers();
+
+            //Configure DbContext with SQLServer
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(DbConntectionString));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookReviews.API", Version = "v1" });
